@@ -20,6 +20,16 @@ func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
 	}
 }
 
+func (c *ContaCorrente) Depositar(valorDoDeposito float64) (string, float64) {
+	if valorDoDeposito > 0 {
+		c.saldo += valorDoDeposito
+		return "Deposito realizado com sucesso", c.saldo
+	} else {
+		return "Valor do deposito menor que zero", c.saldo
+	}
+}
+
+// variadic function
 func SomarVariosNumeros(numeros ...int) int {
 	resultado := 0
 
@@ -32,22 +42,20 @@ func SomarVariosNumeros(numeros ...int) int {
 
 func main() {
 	// comparison()
+	// fmt.Println("Resultado SomarVariosNumeros:", SomarVariosNumeros(1, 2, 3, 4, 5))
 
 	contaDoAgumon := ContaCorrente{}
 	contaDoAgumon.titular = "Agumon"
 	contaDoAgumon.saldo = 500
 
-	fmt.Println("Saldo do agumon (antes)", contaDoAgumon.saldo)
+	fmt.Println("Saldo do Agumon (antes do saque)", contaDoAgumon.saldo)
 
 	fmt.Println(contaDoAgumon.Sacar(300))
 
-	fmt.Println("Saldo do agumon (depois)", contaDoAgumon.saldo)
+	fmt.Println("Saldo do Agumon (depois do saque)", contaDoAgumon.saldo)
 
-	fmt.Println(contaDoAgumon.Sacar(-100))
-
-	fmt.Println("Saldo do agumon (depois)", contaDoAgumon.saldo)
-
-	fmt.Println("Resultado SomarVariosNumeros:", SomarVariosNumeros(1, 2, 3, 4, 5))
+	status, saldo := contaDoAgumon.Depositar(400)
+	fmt.Println("Status do deposito:", status, "- Saldo:", saldo)
 }
 
 func comparison() {
