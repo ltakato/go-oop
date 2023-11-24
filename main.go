@@ -10,6 +10,10 @@ type ContaCorrente struct {
 }
 
 func main() {
+	comparison()
+}
+
+func comparison() {
 	contaDoTakatittos := ContaCorrente{
 		titular:       "Takatittos",
 		numeroAgencia: 589,
@@ -53,5 +57,4 @@ func main() {
 	fmt.Println(*contaDaCris)
 	fmt.Println(*contaDaCris2)
 	fmt.Println(*contaDaCris == *contaDaCris2)
-
 }
