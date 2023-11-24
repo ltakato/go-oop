@@ -40,22 +40,29 @@ func SomarVariosNumeros(numeros ...int) int {
 	return resultado
 }
 
+func (c *ContaCorrente) Transferir(valorDaTransferencia float64, contaDestino *ContaCorrente) bool {
+	if valorDaTransferencia < c.saldo && valorDaTransferencia > 0 {
+		c.saldo -= valorDaTransferencia
+		contaDestino.Depositar(valorDaTransferencia)
+		return true
+	} else {
+		return false
+	}
+}
+
 func main() {
 	// comparison()
+
 	// fmt.Println("Resultado SomarVariosNumeros:", SomarVariosNumeros(1, 2, 3, 4, 5))
 
-	contaDoAgumon := ContaCorrente{}
-	contaDoAgumon.titular = "Agumon"
-	contaDoAgumon.saldo = 500
+	contaDoAgumon := ContaCorrente{titular: "Agumon", saldo: 500}
+	contaDoGarurumon := ContaCorrente{titular: "Garurumon", saldo: 800}
 
-	fmt.Println("Saldo do Agumon (antes do saque)", contaDoAgumon.saldo)
+	status := contaDoAgumon.Transferir(200, &contaDoGarurumon)
 
-	fmt.Println(contaDoAgumon.Sacar(300))
-
-	fmt.Println("Saldo do Agumon (depois do saque)", contaDoAgumon.saldo)
-
-	status, saldo := contaDoAgumon.Depositar(400)
-	fmt.Println("Status do deposito:", status, "- Saldo:", saldo)
+	fmt.Println("Status transferencia:", status)
+	fmt.Println(contaDoAgumon)
+	fmt.Println(contaDoGarurumon)
 }
 
 func comparison() {
