@@ -20,6 +20,16 @@ func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
 	}
 }
 
+func SomarVariosNumeros(numeros ...int) int {
+	resultado := 0
+
+	for _, numero := range numeros {
+		resultado += numero
+	}
+
+	return resultado
+}
+
 func main() {
 	// comparison()
 
@@ -36,6 +46,8 @@ func main() {
 	fmt.Println(contaDoAgumon.Sacar(-100))
 
 	fmt.Println("Saldo do agumon (depois)", contaDoAgumon.saldo)
+
+	fmt.Println("Resultado SomarVariosNumeros:", SomarVariosNumeros(1, 2, 3, 4, 5))
 }
 
 func comparison() {
