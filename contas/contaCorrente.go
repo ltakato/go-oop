@@ -1,7 +1,9 @@
 package contas
 
+import "github.com/ltakato/go-oop/clientes"
+
 type ContaCorrente struct {
-	Titular       string
+	Titular       clientes.Titular
 	NumeroAgencia int
 	NumeroConta   int
 	Saldo         float64

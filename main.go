@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/ltakato/go-oop/contas/contas"
+	"github.com/ltakato/go-oop/clientes"
+	"github.com/ltakato/go-oop/contas"
 )
 
 // variadic function
@@ -22,8 +23,10 @@ func main() {
 
 	// fmt.Println("Resultado SomarVariosNumeros:", SomarVariosNumeros(1, 2, 3, 4, 5))
 
-	contaDoAgumon := contas.ContaCorrente{Titular: "Agumon", Saldo: 500}
-	contaDoGarurumon := contas.ContaCorrente{Titular: "Garurumon", Saldo: 800}
+	clienteAgumon := clientes.Titular{Nome: "Agumon", CPF: "123.111.123-12", Profissao: "Digimon"}
+	contaDoAgumon := contas.ContaCorrente{Titular: clienteAgumon, Saldo: 500}
+	clienteGarurumon := clientes.Titular{Nome: "Garurumon", CPF: "223.311.123-85", Profissao: "Digimon"}
+	contaDoGarurumon := contas.ContaCorrente{Titular: clienteGarurumon, Saldo: 800}
 
 	status := contaDoAgumon.Transferir(200, &contaDoGarurumon)
 
@@ -33,8 +36,11 @@ func main() {
 }
 
 func comparison() {
+	clienteTakatittos := clientes.Titular{
+		Nome: "Takatittos",
+	}
 	contaDoTakatittos := contas.ContaCorrente{
-		Titular:       "Takatittos",
+		Titular:       clienteTakatittos,
 		NumeroAgencia: 589,
 		NumeroConta:   123456,
 		Saldo:         125.5,
@@ -43,7 +49,7 @@ func comparison() {
 	// fmt.Println(contaDoTakatittos)
 
 	contaDoTakatittos2 := contas.ContaCorrente{
-		Titular:       "Takatittos",
+		Titular:       clienteTakatittos,
 		NumeroAgencia: 589,
 		NumeroConta:   123456,
 		Saldo:         125.5,
@@ -61,11 +67,11 @@ func comparison() {
 
 	var contaDaCris *contas.ContaCorrente
 	contaDaCris = new(contas.ContaCorrente)
-	contaDaCris.Titular = "Cris"
+	contaDaCris.Titular = clientes.Titular{Nome: "Cris"}
 
 	var contaDaCris2 *contas.ContaCorrente
 	contaDaCris2 = new(contas.ContaCorrente)
-	contaDaCris2.Titular = "Cris"
+	contaDaCris2.Titular = clientes.Titular{Nome: "Cris"}
 
 	// will compare address!!
 	fmt.Println(contaDaCris)
