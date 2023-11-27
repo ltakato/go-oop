@@ -24,15 +24,19 @@ func main() {
 	// fmt.Println("Resultado SomarVariosNumeros:", SomarVariosNumeros(1, 2, 3, 4, 5))
 
 	clienteAgumon := clientes.Titular{Nome: "Agumon", CPF: "123.111.123-12", Profissao: "Digimon"}
-	contaDoAgumon := contas.ContaCorrente{Titular: clienteAgumon, Saldo: 500}
+	contaDoAgumon := contas.ContaCorrente{Titular: clienteAgumon}
+	contaDoAgumon.Depositar(500)
 	clienteGarurumon := clientes.Titular{Nome: "Garurumon", CPF: "223.311.123-85", Profissao: "Digimon"}
-	contaDoGarurumon := contas.ContaCorrente{Titular: clienteGarurumon, Saldo: 800}
+	contaDoGarurumon := contas.ContaCorrente{Titular: clienteGarurumon}
+	contaDoGarurumon.Depositar(800)
 
 	status := contaDoAgumon.Transferir(200, &contaDoGarurumon)
 
 	fmt.Println("Status transferencia:", status)
 	fmt.Println(contaDoAgumon)
+	fmt.Println("Saldo Agumon: ", contaDoAgumon.ObterSaldo())
 	fmt.Println(contaDoGarurumon)
+	fmt.Println("Saldo Garurumon: ", contaDoGarurumon.ObterSaldo())
 }
 
 func comparison() {
@@ -43,8 +47,8 @@ func comparison() {
 		Titular:       clienteTakatittos,
 		NumeroAgencia: 589,
 		NumeroConta:   123456,
-		Saldo:         125.5,
 	}
+	contaDoTakatittos.Depositar(125.5)
 
 	// fmt.Println(contaDoTakatittos)
 
@@ -52,8 +56,8 @@ func comparison() {
 		Titular:       clienteTakatittos,
 		NumeroAgencia: 589,
 		NumeroConta:   123456,
-		Saldo:         125.5,
 	}
+	contaDoTakatittos2.Depositar(125.5)
 
 	// go knows how to compare structs! (will not compare addresses for example)
 	// will compare the content itself
