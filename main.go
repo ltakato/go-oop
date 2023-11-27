@@ -18,6 +18,14 @@ func SomarVariosNumeros(numeros ...int) int {
 	return resultado
 }
 
+type verificarConta interface {
+	Sacar(valor float64) string
+}
+
+func PagarBoleto(conta verificarConta, valorDoBoleto float64) {
+	conta.Sacar(valorDoBoleto)
+}
+
 func main() {
 	// comparison()
 
@@ -26,6 +34,11 @@ func main() {
 	clienteAgumon := clientes.Titular{Nome: "Agumon", CPF: "123.111.123-12", Profissao: "Digimon"}
 	contaDoAgumon := contas.ContaCorrente{Titular: clienteAgumon}
 	contaDoAgumon.Depositar(500)
+
+	PagarBoleto(&contaDoAgumon, 60)
+
+	fmt.Println("Valor pós pagamento do boleto do Agumon: ", contaDoAgumon.ObterSaldo())
+
 	clienteGarurumon := clientes.Titular{Nome: "Garurumon", CPF: "223.311.123-85", Profissao: "Digimon"}
 	contaDoGarurumon := contas.ContaCorrente{Titular: clienteGarurumon}
 	contaDoGarurumon.Depositar(800)
@@ -37,6 +50,12 @@ func main() {
 	fmt.Println("Saldo Agumon: ", contaDoAgumon.ObterSaldo())
 	fmt.Println(contaDoGarurumon)
 	fmt.Println("Saldo Garurumon: ", contaDoGarurumon.ObterSaldo())
+
+	clientePatamon := clientes.Titular{Nome: "Patamon", CPF: "728.431.123-98", Profissao: "Digimon"}
+	contaDoPatamon := contas.ContaPoupanca{Titular: clientePatamon}
+	contaDoPatamon.Depositar(100)
+
+	fmt.Println("Saldo do Patamon:", contaDoPatamon.ObterSaldo())
 }
 
 func comparison() {
